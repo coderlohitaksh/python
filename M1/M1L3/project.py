@@ -1,0 +1,3 @@
+cong = (" Dear, Loy\n congratulation champ!\nI just heard the incredible news that you’ve won the gold medal at the State Games, and I couldn’t be prouder. What an amazing achievement! All your hard work, dedication, and perseverance have truly paid off, and you deserve every bit of this success.\n Watching your journey and seeing the effort you've put in behind the scenes has been nothing short of inspiring. You’ve shown what it means to stay committed to a goal and chase it with everything you've got. You didn’t just compete—you conquered!\n Enjoy every moment of this victory. You’ve earned it in the truest sense. Here's to many more milestones ahead—this is just the beginning!\n With heartfelt congratulations,\n Ram")
+
+print(cong.upper())
