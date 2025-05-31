@@ -13,4 +13,3 @@ D = True
 print("type of D is : ", type(D))
 
 print ("The end")
-s
