@@ -1,14 +1,16 @@
+# BMI checker
+
 # BMI Calculator
 
 # Get user input
 weight = float(input("Enter your weight in kilograms: "))
-height = float(input("Enter your height in centimeters: "))
+height = float(input("Enter your height in meters: "))
 
 # Calculate BMI
 bmi = weight / (height ** 2)
 
 # Display the result
-print("Your BMI is: ")
+print(f"Your BMI is: {bmi:.2f}")
 
 # Interpret the result
 if bmi < 18.5:
