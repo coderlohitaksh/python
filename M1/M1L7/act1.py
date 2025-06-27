@@ -2,7 +2,8 @@
 #indentity operator
 
 a = "Lohitaksh"
-b = "Takshwik"
+b = "Tashwik"
+
 
 if(a in b):
     print("True")
