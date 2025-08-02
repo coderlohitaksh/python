@@ -1,4 +1,4 @@
-#reversing orders
+# reversing orders
 
 str = input("Enter a string to reverse: ")
 rstr = str[::-1]
