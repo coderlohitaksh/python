@@ -1,0 +1,29 @@
+print("\nWhat is Binary? : \n161")
+print("1.Relating to, composed of, or involving two things.")
+print("2.Relating to, using, or denoting a system of numerical notation[alphabet] that has 2 rather than 10 as a base.")
+print("3.The 2 numbers are '0' and '1'.")
+print("4. Binary is a special number code.")
+print("5. It only uses two numbers: 0 and 1.")
+print("6. Computers and robots understand binary, not normal numbers like 5 or 9.")
+print("7. Binary code is called 🤖 Code or robot code .\n")
+
+number = int(input("Type a number: "))
+
+binary = ""
+n = number
+
+# Special case if number is zero
+if number == 0:
+    binary = "0"
+else:
+    while n > 0:
+        remainder = n % 2
+        binary = str(remainder) + binary
+        n = n // 2
+
+print("\nThe binary of the number ",number ,"is ",binary,".")
+print("\nHow did we do this?")
+print("We kept dividing the number by 2 and writing down the extra (remainder).")
+print("When we finish, we read the extras backwards — and that is the binary code! ")
+print("You can see it for yourself .")
+print("BYE\n")
