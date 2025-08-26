@@ -12,5 +12,5 @@ angle = 360.0/sides
 for i in range (sides):
     polygon.forward (side_length)
     polygon.right (angle)
-    
-    turtle.done()
+
+turtle.done()
