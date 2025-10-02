@@ -1,11 +1,3 @@
-def factorial (n):
-    if n == 0 or n == 1 :
-        return 1
-    else :
-        return n * factorial(n - 1)
-num = int(input("Enter a number : "))
-
-if num < 0 :
-    print("Factorial does not exist in negative number .")
-else :
-    print(f"The factorial of {num} is {factorial(num)} .")
+import time
+from colorama import init, Fore
+init(autoreset=True)
