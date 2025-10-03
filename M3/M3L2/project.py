@@ -1,6 +1,7 @@
-from colorama import init, Fore
+
 import time
 import pyfiglet
+from colorama import init, Fore
 init(autoreset=True)
 
 colors = [Fore.RED, Fore.YELLOW, Fore.GREEN, Fore.CYAN, Fore.BLUE, Fore.MAGENTA]
