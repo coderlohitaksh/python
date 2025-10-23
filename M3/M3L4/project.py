@@ -11,19 +11,17 @@ init(autoreset=True)
 
 stop_music = False
 
-def play_chord(frequencies, duration=1, volume=0.5):
+def play_chord(frequencies, duration=0.5, volume=0.5):
     sample_rate = 44100
     t = np.linspace(0, duration, int(sample_rate * duration), False)
-    wave = sum([np.sin(2 * np.pi * f * t) for f in frequencies]) / len(frequencies)
-    sd.play(volume * wave, samplerate=sample_rate)
-    sd.wait()
+    wave = sum(np.sin(2 * np.pi * f * t) for f in frequencies) / len(frequencies)
+    sd.play(volume * wave, samplerate=sample_rate, blocking=False)
 
 def play_light_sound(duration=0.2, frequency=880, volume=0.3):
     sample_rate = 44100
     t = np.linspace(0, duration, int(sample_rate * duration), False)
     wave = np.sin(2 * np.pi * frequency * t)
-    sd.play(volume * wave, samplerate=sample_rate)
-    sd.wait()
+    sd.play(volume * wave, samplerate=sample_rate, blocking=False)
 
 def type_text(text, color=Fore.WHITE, delay=0.05):
     for char in text:
@@ -58,11 +56,23 @@ def ending_scene():
     type_text("\nThanks for playing! See you next time!", Fore.CYAN, 0.07)
 
 def music_loop():
-    c_major = [261.63, 329.63, 392.00]
+    chords = [
+        [261.63, 329.63, 392.00]
+        [293.66, 369.99, 440.00]  
+        [329.63, 415.30, 493.88]  
+        [261.63, 329.63, 392.00]   
+    ]
+    rhythm = [0.5, 0.5, 0.5, 0.5]
+    light_sounds = [0.2, 0.15, 0.25, 0.2]
+
     while not stop_music:
-        play_chord(c_major, duration=1)
-        play_light_sound(duration=0.2)
-        time.sleep(0.1)
+        for i, chord in enumerate(chords):
+            play_chord(chord, duration=rhythm[i])
+            if chord == [261.63, 329.63, 392.00]:
+                play_light_sound(duration=0.3, frequency=1046)
+            else:
+                play_light_sound(duration=light_sounds[i])
+            time.sleep(rhythm[i])
 
 type_text("Hello!! Dear friends, I am making a game. Now you will play it!", Fore.CYAN, 0.07)
 time.sleep(1)
@@ -70,7 +80,6 @@ rainbow_big_text("A G E\nC O U N T E R")
 
 music_thread = threading.Thread(target=music_loop, daemon=True)
 music_thread.start()
-
 while True:
     age_input = input(Fore.LIGHTYELLOW_EX + "Enter your age: ")
     if age_input.isdigit():
