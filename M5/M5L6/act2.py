@@ -21,71 +21,91 @@ def cinematic_title():
     clear()
 
     title = [
-" ██████╗ ██████╗ ███╗   ███╗██████╗ ",
-"██╔════╝██╔═══██╗████╗ ████║██╔══██╗",
-"██║     ██║   ██║██╔████╔██║██████╔╝",
-"██║     ██║   ██║██║╚██╔╝██║██╔═══╝ ",
-"╚██████╗╚██████╔╝██║ ╚═╝ ██║██║     ",
-" ╚═════╝ ╚═════╝ ╚═╝     ╚═╝╚═╝     "
+"███████╗██╗      █████╗ ███████╗██╗  ██╗",
+"██╔════╝██║     ██╔══██╗██╔════╝██║  ██║",
+"█████╗  ██║     ███████║███████╗███████║",
+"██╔══╝  ██║     ██╔══██║╚════██║██╔══██║",
+"██║     ███████╗██║  ██║███████║██║  ██║",
+"╚═╝     ╚══════╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝"
     ]
 
     print(Fore.BLUE)
     for line in title:
         print(line)
-        time.sleep(0.15)
+        time.sleep(0.1)
 
     print(Fore.CYAN)
-    type_text("\n        OBJECT COMPARISON TERMINAL\n", 0.04)
+    type_text("\n        FLASHCARD TERMINAL\n", 0.04)
 
 # ---------- Loading ----------
 def loading():
     print(Fore.YELLOW)
-    type_text("Initializing system...\n", 0.03)
+    type_text("Loading flashcard system...\n", 0.03)
 
     for _ in range(25):
         sys.stdout.write("█")
         sys.stdout.flush()
-        time.sleep(0.03)
+        time.sleep(0.02)
 
     print("\n")
 
 # ---------- Class ----------
-class A:
-    def __init__(self, value):
-        self.value = value
+class flashcard:
+    def __init__(self, word, meaning):
+        self.word = word
+        self.meaning = meaning
 
-    def __lt__(self, other):
-        return self.value < other.value
+    def __str__(self):
+        return self.word + " ( " + self.meaning + " )"
 
-    def __eq__(self, other):
-        return self.value == other.value
+# ---------- Storage ----------
+flashcards = []
 
-# ---------- Compare ----------
-def compare(a1, a2):
-    ob1 = A(a1)
-    ob2 = A(a2)
+# ---------- Functions ----------
+def add_flashcard():
+    type_text(Fore.CYAN + "\nAdd New Flashcard\n")
 
-    print(Fore.CYAN + "\nComparing objects...\n")
-    time.sleep(0.5)
+    word = input(Fore.YELLOW + "Enter word: ")
+    meaning = input(Fore.YELLOW + "Enter meaning: ")
 
-    print(Fore.WHITE + f"Object 1: {a1}")
-    print(Fore.WHITE + f"Object 2: {a2}\n")
+    flashcards.append(flashcard(word, meaning))
 
-    time.sleep(0.5)
+    type_text(Fore.GREEN + "Flashcard added successfully!")
 
-    if ob1 < ob2:
-        type_text(Fore.GREEN + "Result: Object 1 < Object 2")
-    elif ob1 == ob2:
-        type_text(Fore.YELLOW + "Result: Object 1 == Object 2")
-    else:
-        type_text(Fore.RED + "Result: Object 1 > Object 2")
+def view_flashcards():
+    type_text(Fore.CYAN + "\nYour Flashcards:\n")
+
+    if not flashcards:
+        type_text(Fore.RED + "No flashcards available!")
+        return
+
+    for i in flashcards:
+        print(Fore.WHITE + "> " + str(i))
+        time.sleep(0.2)
+
+def quiz():
+    if not flashcards:
+        type_text(Fore.RED + "No flashcards to quiz!")
+        return
+
+    type_text(Fore.CYAN + "\nQuiz Mode\n")
+
+    for card in flashcards:
+        answer = input(Fore.YELLOW + f"What is the meaning of '{card.word}'? ")
+
+        if answer.lower() == card.meaning.lower():
+            type_text(Fore.GREEN + "Correct!")
+        else:
+            type_text(Fore.RED + f"Wrong! Answer: {card.meaning}")
 
 # ---------- Menu ----------
 def menu():
     print(Fore.GREEN)
     print("\n====== MENU ======")
-    print("1  Compare Objects")
-    print("2  Exit")
+    print("1  Add Flashcard")
+    print("2  View Flashcards")
+    print("3  Quiz Mode")
+    print("4  Exit")
     print("==================")
 
 # ---------- Main ----------
@@ -98,21 +118,25 @@ def main():
         choice = input(Fore.YELLOW + "Choose option: ")
 
         if choice == "1":
-            try:
-                a1 = int(input(Fore.CYAN + "Enter value for Object 1: "))
-                a2 = int(input(Fore.CYAN + "Enter value for Object 2: "))
-            except ValueError:
-                type_text(Fore.RED + "Invalid input!")
-                continue
-
             clear()
             cinematic_title()
-            compare(a1, a2)
-
+            add_flashcard()
             input(Fore.YELLOW + "\nPress Enter to continue...")
 
         elif choice == "2":
-            type_text(Fore.RED + "Closing program...", 0.04)
+            clear()
+            cinematic_title()
+            view_flashcards()
+            input(Fore.YELLOW + "\nPress Enter to continue...")
+
+        elif choice == "3":
+            clear()
+            cinematic_title()
+            quiz()
+            input(Fore.YELLOW + "\nPress Enter to continue...")
+
+        elif choice == "4":
+            type_text(Fore.RED + "Exiting program...", 0.04)
             break
 
         else:
