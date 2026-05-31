@@ -12,7 +12,7 @@ bg = pygame.image.load("space_bg.jpg")
 bg = pygame.transform.scale(bg, (800, 600))
 mixer.music.load("bg_music.mp3")
 mixer.music.play(-1)
-icon = pygame.image.load("ufo.png")
+icon = pygame.image.load("ufo.png") 
 pygame.display.set_icon(icon)
 
 playerImg = pygame.image.load("001-rocket.png")
