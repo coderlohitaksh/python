@@ -395,5 +395,5 @@ while running:
 
     fps = int(clock.get_fps())
     pygame.display.set_caption(f"Space Invader | FPS: {fps}")
-    pygame.display.update()
+    pygame.display.update
 
