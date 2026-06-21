@@ -1,248 +1,494 @@
 from tkinter import *
-from tkinter.ttk import Combobox
 from tkinter import messagebox
-from math import sqrt
-
-def calculate():
-    try:
-        n1 = float(entry1.get())
-        op = operation.get()
-
-        if op in ["Square", "Cube", "Square Root"]:
-            if op == "Square":
-                result = n1 ** 2
-                expression = f"{n1}² = {result}"
-
-            elif op == "Cube":
-                result = n1 ** 3
-                expression = f"{n1}³ = {result}"
-
-            elif op == "Square Root":
-                result = sqrt(n1)
-                expression = f"√{n1} = {result}"
-
-        else:
-            n2 = float(entry2.get())
-
-            if op == "+":
-                result = n1 + n2
-            elif op == "-":
-                result = n1 - n2
-            elif op == "*":
-                result = n1 * n2
-            elif op == "/":
-                result = n1 / n2
-            elif op == "%":
-                result = n1 % n2
-            elif op == "^":
-                result = n1 ** n2
-            elif op == "//":
-                result = n1 // n2
-            elif op == "Max":
-                result = max(n1, n2)
-            elif op == "Min":
-                result = min(n1, n2)
-            elif op == "Average":
-                result = (n1 + n2) / 2
-
-            expression = f"{n1} {op} {n2} = {result}"
-
-        result_box.delete("1.0", END)
-        result_box.insert(END, expression)
-
-        history.insert(END, expression)
-
-        status.config(text=f"Last Operation: {op}")
-
-    except ZeroDivisionError:
-        messagebox.showerror("Error", "Cannot divide by zero")
-    except ValueError:
-        messagebox.showerror("Error", "Please enter valid numbers")
-
-def clear_inputs():
-    entry1.delete(0, END)
-    entry2.delete(0, END)
-    result_box.delete("1.0", END)
-    status.config(text="Ready")
-
-def clear_history():
-    if messagebox.askyesno("Confirm", "Delete all calculation history?"):
-        history.delete(0, END)
-        status.config(text="History Cleared")
+from datetime import date
+import random
+from PIL import Image, ImageTk
 
 root = Tk()
-root.title("🚀 Smart Calculator")
-root.geometry("700x550")
-root.configure(bg="#222831")
+root.title("Age Calculator Pro 🚀")
+root.geometry("700x680")
+root.configure(bg="#0F172A")
+root.resizable(False, False)
 
 try:
-    icon = PhotoImage(file="001-rocket.png")
-    root.iconphoto(True, icon)
+    root.iconphoto(True, PhotoImage(file="001-rocket.png"))
 except:
     pass
 
-title = Label(
+bg = "#485D8D"
+card = "#7C97C3"
+accent = "#8B5CF6"
+gold = "#DCB879"
+white = "#FFFFFF"
+green = "#008B5D"
+light = "#FF5DA9"
+
+secret_number = random.randint(1, 10)
+
+def calculate_age():
+    try:
+        name = name_entry.get().strip()
+
+        if name == "":
+            messagebox.showwarning(
+                "Missing Information",
+                "Please enter your name."
+            )
+            return
+
+        birth_date = date(
+            int(year_entry.get()),
+            month_names.index(month_var.get()) + 1, 
+            int(day_entry.get())
+        )
+
+        today = date.today()
+
+        age = today.year - birth_date.year
+
+        if (today.month, today.day) < (
+            birth_date.month,
+            birth_date.day
+        ):
+            age -= 1
+
+        days_lived = (today - birth_date).days
+
+        next_birthday = date(
+            today.year,
+            birth_date.month,
+            birth_date.day
+        )
+
+        if next_birthday < today:
+            next_birthday = date(
+                today.year + 1,
+                birth_date.month,
+                birth_date.day
+            )
+
+        birthday_countdown = (
+            next_birthday - today
+        ).days
+
+        if age < 13:
+            level = "Young Adventurer"
+        elif age < 20:
+            level = "Teen Challenger"
+        elif age < 40:
+            level = "Adult Explorer"
+        elif age < 60:
+            level = "Wise Warrior"
+        else:
+            level = "Legend Master"
+
+        result_name.config(
+            text=f"🎉 Welcome {name}"
+        )
+
+        result_age.config(
+            text=str(age)
+        )
+
+        result_level.config(
+            text=f"🏆 {level}"
+        )
+
+        result_days.config(
+            text=f"📅 Days Lived : {days_lived:,}"
+        )
+
+        result_birthday.config(
+            text=f"🎂 Next Birthday : {birthday_countdown} day(s)"
+        )
+
+        achievement.config(
+            text=f"⭐ Achievement Unlocked : {level}"
+        )
+
+    except:
+        messagebox.showerror(
+            "Error",
+            "Please enter a valid date."
+        )
+
+def play_game():
+    global secret_number
+
+    try:
+        guess = int(game_entry.get())
+
+        if guess == secret_number:
+            game_result.config(
+                text="🎉 Correct Guess!",
+                fg=green
+            )
+            secret_number = random.randint(1, 10)
+
+        elif guess < secret_number:
+            game_result.config(
+                text="⬆️ Try Higher",
+                fg=gold
+            )
+
+        else:
+            game_result.config(
+                text="⬇️ Try Lower",
+                fg=gold
+            )
+
+    except:
+        game_result.config(
+            text="❌ Enter a valid number",
+            fg="red"
+        )
+
+def enter_btn(e):
+    calc_btn.config(bg="#7C3AED")
+
+def leave_btn(e):
+    calc_btn.config(bg=accent)
+
+header = Frame(root, bg=bg)
+header.pack(pady=10)
+
+try:
+    img = Image.open("logo1.png")
+
+    width = 520
+    height = int(width * img.height / img.width)
+
+    img = img.resize((width, height))
+
+    logo = ImageTk.PhotoImage(img)
+
+    logo_label = Label(
+        header,
+        image=logo,
+        bg=bg
+    )
+    logo_label.pack(pady=(5, 10))
+
+except Exception as e:
+    print("Logo Error:", e)
+
+Label(
+    header,
+    text="Calculate • Explore • Level Up",
+    bg=bg,
+    fg=light,
+    font=("Segoe UI", 11, "bold")
+).pack()
+
+input_card = Frame(
     root,
-    text="🚀 Smart Calculator",
-    font=("Segoe UI", 20, "bold"),
-    bg="#222831",
-    fg="#00ADB5"
+    bg=card,
+    padx=25,
+    pady=20
 )
-title.pack(pady=10)
 
-subtitle = Label(
-    root,
-    text="Basic and Advanced Calculator using Tkinter",
-    font=("Segoe UI", 10),
-    bg="#222831",
-    fg="white"
+input_card.pack(
+    padx=20,
+    pady=8,
+    fill=X
 )
-subtitle.pack()
-
-frame = Frame(root, bg="#222831")
-frame.pack(pady=15)
 
 Label(
-    frame,
-    text="First Number",
-    font=("Segoe UI", 11),
-    bg="#222831",
-    fg="white"
-).grid(row=0, column=0, padx=10, pady=8, sticky="w")
+    input_card,
+    text="👤 Full Name",
+    bg=card,
+    fg=white,
+    font=("Segoe UI", 11, "bold")
+).grid(
+    row=0,
+    column=0,
+    sticky=W,
+    pady=10
+)
 
-entry1 = Entry(frame, width=25, font=("Segoe UI", 11))
-entry1.grid(row=0, column=1, padx=10)
+name_entry = Entry(
+    input_card,
+    width=28,
+    font=("Segoe UI", 11)
+)
+
+name_entry.grid(
+    row=0,
+    column=1,
+    padx=15
+)
 
 Label(
-    frame,
-    text="Second Number",
-    font=("Segoe UI", 11),
-    bg="#222831",
-    fg="white"
-).grid(row=1, column=0, padx=10, pady=8, sticky="w")
+    input_card,
+    text="📅 Day",
+    bg=card,
+    fg=white,
+    font=("Segoe UI", 11, "bold")
+).grid(
+    row=1,
+    column=0,
+    sticky=W,
+    pady=10
+)
 
-entry2 = Entry(frame, width=25, font=("Segoe UI", 11))
-entry2.grid(row=1, column=1, padx=10)
+day_entry = Spinbox(
+    input_card,
+    from_=1,
+    to=31,
+    width=25,
+    font=("Segoe UI", 11)
+)
+
+day_entry.grid(
+    row=1,
+    column=1,
+    padx=15
+)
 
 Label(
-    frame,
-    text="Operation",
-    font=("Segoe UI", 11),
-    bg="#222831",
-    fg="white"
-).grid(row=2, column=0, padx=10, pady=8, sticky="w")
+    input_card,
+    text="📆 Month",
+    bg=card,
+    fg=white,
+    font=("Segoe UI", 11, "bold")
+).grid(
+    row=2,
+    column=0,
+    sticky=W,
+    pady=10
+)
 
-operation = Combobox(
-    frame,
+month_names = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December"
+]
+
+month_var = StringVar()
+month_var.set("January")
+
+month_entry = OptionMenu(
+    input_card,
+    month_var,
+    *month_names
+)
+
+month_entry.config(
     width=22,
-    font=("Segoe UI", 11),
-    state="readonly"
+    font=("Segoe UI", 10)
 )
 
-operation["values"] = (
-    "+",
-    "-",
-    "*",
-    "/",
-    "%",
-    "^",
-    "//",
-    "Max",
-    "Min",
-    "Average",
-    "Square",
-    "Cube",
-    "Square Root"
+month_entry.grid(
+    row=2,
+    column=1,
+    padx=15
 )
-
-operation.current(0)
-operation.grid(row=2, column=1, padx=10)
-
-button_frame = Frame(root, bg="#222831")
-button_frame.pack(pady=10)
-
-Button(
-    button_frame,
-    text="Calculate",
-    command=calculate,
-    bg="#00ADB5",
-    fg="white",
-    font=("Segoe UI", 10, "bold"),
-    width=15
-).grid(row=0, column=0, padx=5)
-
-Button(
-    button_frame,
-    text="Clear Inputs",
-    command=clear_inputs,
-    bg="#F96D00",
-    fg="white",
-    font=("Segoe UI", 10, "bold"),
-    width=15
-).grid(row=0, column=1, padx=5)
-
-Button(
-    button_frame,
-    text="Clear History",
-    command=clear_history,
-    bg="#6A5ACD",
-    fg="white",
-    font=("Segoe UI", 10, "bold"),
-    width=15
-).grid(row=0, column=2, padx=5)
-
-Button(
-    button_frame,
-    text="Exit",
-    command=root.destroy,
-    bg="#E84545",
-    fg="white",
-    font=("Segoe UI", 10, "bold"),
-    width=15
-).grid(row=0, column=3, padx=5)
 
 Label(
-    root,
-    text="Result",
-    font=("Segoe UI", 12, "bold"),
-    bg="#222831",
-    fg="white"
-).pack(pady=(15, 5))
-
-result_box = Text(
-    root,
-    height=2,
-    width=45,
-    font=("Consolas", 12)
+    input_card,
+    text="🗓 Year",
+    bg=card,
+    fg=white,
+    font=("Segoe UI", 11, "bold")
+).grid(
+    row=3,
+    column=0,
+    sticky=W,
+    pady=10
 )
-result_box.pack()
+
+year_entry = Spinbox(
+    input_card,
+    from_=1900,
+    to=2100,
+    width=25,
+    font=("Segoe UI", 11)
+)
+
+year_entry.grid(
+    row=3,
+    column=1,
+    padx=15
+)
+
+calc_btn = Button(
+    root,
+    text="⚡ CALCULATE AGE",
+    bg=accent,
+    fg="white",
+    activebackground="#7C3AED",
+    activeforeground="white",
+    font=("Segoe UI", 13, "bold"),
+    bd=0,
+    padx=25,
+    pady=12,
+    cursor="hand2",
+    command=calculate_age
+)
+
+calc_btn.pack(pady=10)
+
+calc_btn.bind("<Enter>", enter_btn)
+calc_btn.bind("<Leave>", leave_btn)
+
+result_card = Frame(
+    root,
+    bg=card,
+    padx=20,
+    pady=20
+)
+
+result_card.pack(
+    padx=20,
+    pady=8,
+    fill=X
+)
 
 Label(
-    root,
-    text="Calculation History",
-    font=("Segoe UI", 12, "bold"),
-    bg="#222831",
-    fg="white"
-).pack(pady=(15, 5))
+    result_card,
+    text="🏆 AGE DASHBOARD",
+    bg=card,
+    fg=gold,
+    font=("Segoe UI", 16, "bold")
+).pack()
 
-history = Listbox(
-    root,
-    width=70,
-    height=10,
-    font=("Consolas", 10),
-    bg="#EEEEEE"
+result_name = Label(
+    result_card,
+    text="",
+    bg=card,
+    fg=white,
+    font=("Segoe UI", 15, "bold")
 )
-history.pack(pady=5)
 
-status = Label(
-    root,
-    text="Ready",
-    bd=1,
-    relief=SUNKEN,
-    anchor=W,
-    bg="#393E46",
-    fg="white"
+result_name.pack(pady=(15, 5))
+
+result_age = Label(
+    result_card,
+    text="?",
+    bg=card,
+    fg=gold,
+    font=("Segoe UI Black", 52)
 )
-status.pack(side=BOTTOM, fill=X)
 
-root.mainloop() 
+result_age.pack()
+
+result_level = Label(
+    result_card,
+    text="",
+    bg=card,
+    fg=green,
+    font=("Segoe UI", 14, "bold")
+)
+
+result_level.pack()
+
+achievement = Label(
+    result_card,
+    text="",
+    bg=card,
+    fg="#FBBF24",
+    font=("Segoe UI", 12, "bold")
+)
+
+achievement.pack(pady=5)
+
+result_days = Label(
+    result_card,
+    text="",
+    bg=card,
+    fg=white,
+    font=("Segoe UI", 11)
+)
+
+result_days.pack(pady=5)
+
+result_birthday = Label(
+    result_card,
+    text="",
+    bg=card,
+    fg=white,
+    font=("Segoe UI", 11)
+)
+
+result_birthday.pack()
+
+game_card = Frame(
+    root,
+    bg=card,
+    padx=20,
+    pady=20
+)
+
+game_card.pack(
+    padx=20,
+    pady=5,
+    fill=X
+)
+
+Label(
+    game_card,
+    text="🎮 BONUS GAME",
+    bg=card,
+    fg=gold,
+    font=("Segoe UI", 16, "bold")
+).pack()
+
+Label(
+    game_card,
+    text="Guess a number between 1 and 10",
+    bg=card,
+    fg=light,
+    font=("Segoe UI", 10)
+).pack(pady=5)
+
+game_entry = Entry(
+    game_card,
+    width=10,
+    justify="center",
+    font=("Segoe UI", 14)
+)
+
+game_entry.pack(pady=10)
+
+Button(
+    game_card,
+    text="🎯 GUESS",
+    bg=gold,
+    fg="white",
+    bd=0,
+    padx=20,
+    pady=8,
+    font=("Segoe UI", 11, "bold"),
+    command=play_game
+).pack()
+
+game_result = Label(
+    game_card,
+    text="",
+    bg=card,
+    fg=white,
+    font=("Segoe UI", 12, "bold")
+)
+
+game_result.pack(pady=10)
+
+footer = Label(
+    root,
+    text="🚀 Powered by Python & Tkinter",
+    bg=bg,
+    fg="#94A3B8",
+    font=("Segoe UI", 9)
+)
+
+footer.pack(side=BOTTOM, pady=8)
+
+root.mainloop()
