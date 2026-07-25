@@ -289,7 +289,7 @@ Label(
     bg="black",
     fg=DARK,
     font=("Consolas",10)
-).pack(pady=5)
+).pack(pady = 5)
 
 matrix_rain()
 

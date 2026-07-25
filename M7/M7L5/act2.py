@@ -6,7 +6,7 @@ ctk.set_appearance_mode("dark")
 ctk.set_default_color_theme("blue")
 
 root = ctk.CTk()
-root.title("💰 Denomination Counter")
+root.title("💰 Denomination Counter 💰")
 root.geometry("850x700")
 root.resizable(False, False)
 
