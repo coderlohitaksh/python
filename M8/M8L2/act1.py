@@ -80,26 +80,6 @@ for bit in range(1, 7):
 
 print(Fore.YELLOW + "└──────────┴──────────────┴──────────────┘")
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 from colorama import Fore, Style, init
 
 init(autoreset=True)
