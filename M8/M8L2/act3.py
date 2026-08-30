@@ -205,7 +205,7 @@ if result:
 
     print(
         Fore.GREEN
-        + f"\n✓ Bit 2 of {n} is ON"
+        + f"\n✓ Bit 2 of {n} is ON."
         + f"  |  Your guess: {guess}"
     )
 
@@ -213,6 +213,6 @@ else:
 
     print(
         Fore.RED
-        + f"\n✗ Bit 2 of {n} is OFF"
+        + f"\n✗ Bit 2 of {n} is OFF."
         + f"  |  Your guess: {guess}"
     )  

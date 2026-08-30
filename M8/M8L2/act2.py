@@ -93,7 +93,7 @@ if n > 0:
         + f"\n✓ First set bit in {n} is at position {pos}"
     )
 
-else:
+else:  
 
     print(
         Fore.RED

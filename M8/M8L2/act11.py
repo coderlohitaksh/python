@@ -7,7 +7,7 @@ print(Fore.CYAN + "║" + Fore.GREEN + "              SET & POWER BITS          
 print(Fore.CYAN + "╚══════════════════════════════════════════════╝")
 
 
-print(Fore.CYAN + "\nBitwise OR - Set a Bit")
+print(Fore.CYAN + "\nBitwise OR - Set a Bit")  
 
 print(Fore.YELLOW + "\n┌──────────────────────────────┬──────────────┐")
 print(Fore.YELLOW + "│ Operation                    │ Result       │")
