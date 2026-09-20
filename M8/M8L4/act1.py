@@ -18,17 +18,65 @@ def section(text):
     print(Fore.YELLOW + "─" * 52)
 
 
-input(Fore.LIGHTYELLOW_EX + "N & (n-1) clears the rightmost set bit like in 10 or 1010 in binary , it clears the the rightmost 1 in 1010 so it becomes  1000 or 8 in Hindu-Arabic numeration. Press Enter to proceed . ")
-print(Fore.LIGHTYELLOW_EX + "12 & 11 = ",12 & 11,"and the binary is ",bin(12 & 11)[2:])
-print(Fore.LIGHTYELLOW_EX + "8 & 7 = ",8 & 7)
+title("BITWISE POWER OF 2")
 
-n = int(input((Fore.LIGHTGREEN_EX + "Enter a number (try 4 or 6) :")))
-guess = input(Fore.LIGHTGREEN_EX + 
-              (f"Is the number (str{n}) a power of 2 (Yes / No): ")
-              )
-input("Power of 2 (n & (n-1)) == 0 which means only one set bit which is 1 in binary is on . Press Enter to Proceed.")
+input(
+    Fore.LIGHTYELLOW_EX
+    + "Press Enter to learn how n & (n-1) clears the rightmost set bit..."
+)
 
-if n > 0 and (n & (n-1)) == 0 :
-    print(f"{n}'s binary number is {bin(n)[2:]} power of 2 is yes , you guess is {guess}")
+section("Clearing the rightmost set bit")
+
+print(Fore.LIGHTYELLOW_EX + "12 & 11 =", 12 & 11)
+print("12 in binary :", bits(12))
+print("11 in binary :", bits(11))
+print("Result       :", bits(12 & 11))
+
+print()
+
+print(Fore.LIGHTYELLOW_EX + "8 & 7 =", 8 & 7)
+print("8 in binary  :", bits(8))
+print("7 in binary  :", bits(7))
+print("Result       :", bits(8 & 7))
+
+
+section("Checking whether a number is a power of 2")
+
+n = int(
+    input(
+        Fore.LIGHTGREEN_EX
+        + "Enter a number (try 4 or 6): "
+    )
+)
+
+guess = input(
+    Fore.LIGHTGREEN_EX
+    + f"Is {n} a power of 2? (Yes / No): "
+).strip().lower()
+
+input(
+    Fore.LIGHTYELLOW_EX
+    + "\nPress Enter to check using n & (n-1)..."
+)
+
+is_power_of_2 = n > 0 and (n & (n - 1)) == 0
+
+print()
+print("Number :", n)
+print("Binary :", bits(n))
+
+if is_power_of_2:
+    print(Fore.GREEN + "Result : YES — it is a power of 2.")
 else:
-    print(f"{n}'s binary number is {bin(n)[2:]} power of 2 is no , you guess is {guess}")
+    print(Fore.RED + "Result : NO — it is not a power of 2.")
+
+correct_guess = (
+    (guess == "yes" and is_power_of_2)
+    or
+    (guess == "no" and not is_power_of_2)
+)
+
+if correct_guess:
+    print(Fore.GREEN + "Your guess is CORRECT!")
+else:
+    print(Fore.RED + "Your guess is INCORRECT.")
