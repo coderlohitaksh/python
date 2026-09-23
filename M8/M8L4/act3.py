@@ -132,6 +132,6 @@ print("2. Multiplies when the bit is 1.")
 print("3. Squares the base.")
 print("4. Divides the exponent by 2.")
 
-print(Fore.YELLOW + "\nTime Complexity: O(log n)")
+print(Fore.YELLOW + "\nTime Complexity: O(log n).")
 
 print(Fore.GREEN + "\n=> BINARY EXPONENTIATION")

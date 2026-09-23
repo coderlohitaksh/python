@@ -101,7 +101,7 @@ print("Distinguishes powers of 4 from other powers of 2.")
 
 print(Fore.GREEN + "\nTherefore:")
 print("n > 0")
-print("(n & (n - 1)) == 0")
+print("(n & (n - 1)) == 0.")
 print("n % 3 == 1")
  
 print(Fore.GREEN + "\n=> POWER OF 4") 
