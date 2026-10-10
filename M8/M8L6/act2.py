@@ -18,7 +18,7 @@ def section(text):
     print(Fore.YELLOW + "─" * 52)
 
 
-title("")
+title("Bit probe")
 
 input(
     Fore.LIGHTYELLOW_EX
