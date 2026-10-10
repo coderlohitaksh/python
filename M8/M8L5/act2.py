@@ -30,7 +30,7 @@ input(
 section("Left Shift (<<)")
 
 n = 5
-print(Fore.LIGHTGREEN_EX + f"\nBefore: n = {n}")
+print(Fore.LIGHTGREEN_EX + f"\nBefore: n = {n}.") 
 print(Fore.LIGHTGREEN_EX + f"Binary: {bits(n)}")
 
 result = n << 1
