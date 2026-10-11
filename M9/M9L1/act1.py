@@ -16,10 +16,6 @@ def section(text):
     print("\n" + Fore.YELLOW + Style.BRIGHT + f"▶ {text}")
     print(Fore.YELLOW + "─" * 52)
 
-
-def reveal(text):
-    print(Fore.LIGHTYELLOW_EX + text)
-
 def sum_down(n):
     if n == 0:
         return 0
