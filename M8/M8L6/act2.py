@@ -1,6 +1,6 @@
 from colorama import Fore, Style, init
 
-init(autoreset=True)ki/yh/
+init(autoreset=True)
 
 def bits(n, width=8):
     return format(n & ((1 << width) - 1), f"0{width}b")
