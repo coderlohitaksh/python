@@ -16,11 +16,6 @@ def section(text):
     print("\n" + Fore.YELLOW + Style.BRIGHT + f"▶ {text}")
     print(Fore.YELLOW + "─" * 52)
 
-def sum_down(n):
-    if n == 0:
-        return 0 
-    return n + sum_down(n - 1)
-
 title("")
 
 input(
