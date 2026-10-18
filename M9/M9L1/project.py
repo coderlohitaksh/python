@@ -21,10 +21,7 @@ def reveal(text):
     print(Fore.LIGHTYELLOW_EX + text)
 
 
-title("")
+title("My Countdown Timer , actually works")
 
-input(
-    Fore.LIGHTYELLOW_EX
-    + "Press Enter to learn how ..."
-)
+
 
