@@ -16,8 +16,21 @@ def section(text):
     print("\n" + Fore.YELLOW + Style.BRIGHT + f"▶ {text}")
     print(Fore.YELLOW + "─" * 52)
 
-title("")
+title("Stack Frame Visualizer")
+
+print(Fore.LIGHTCYAN_EX + "\nThe first part - Tail recursion ")
+
+def tail_sum(n , acc = 0):
+    if n == 0 :
+        return acc
+    return tail_sum(n - 1 , acc + n)
 
 input(
     Fore.LIGHTYELLOW_EX
-    + "Press Enter to learn how ....")
+    + "Press Enter to learn how Python uses tail recursion with an accumulator, adds each value as n counts down, and shows how the final result is built through repeated recursive calls.....")
+
+print(Fore.LIGHTGREEN_EX + f"\nThe tail recursion of 4 is {tail_sum(4)}, which means 4 + 3 + 2 + 1.")
+print(Fore.LIGHTGREEN_EX + f"The tail recursion of 5 is {tail_sum(5)}, which means 5 + 4 + 3 + 2 + 1.")
+
+print(Fore.LIGHTCYAN_EX + "\nThe second part - Linear recursion")
+
