@@ -34,3 +34,20 @@ print(Fore.LIGHTGREEN_EX + f"The tail recursion of 5 is {tail_sum(5)}, which mea
 
 print(Fore.LIGHTCYAN_EX + "\nThe second part - Linear recursion")
 
+def linear_sum(n , y = 0):
+    if n == 0 :
+        return y
+    return linear_sum(n - 1)
+
+input(
+    Fore.LIGHTYELLOW_EX
+     + "Press Enter to learn how Python uses linear recursion is the simplest shape: each call makes exactly one recursive call. The call chain is a straight line from the original call down to the base case, and then back up.....")
+
+
+print(Fore.LIGHTGREEN_EX + f"\nThe linear recursion of 4 is {linear_sum(4)}, which means its going down to the base case 0.")
+print(Fore.LIGHTGREEN_EX + f"The linear recursion of 5 is {linear_sum(5)}, which means its going down to the base case 0.")
+
+print(Fore.LIGHTCYAN_EX + "The third part - Head recursion")
+
+def head_sum(n , x = 0):
+    
