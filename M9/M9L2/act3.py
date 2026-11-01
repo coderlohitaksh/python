@@ -19,7 +19,6 @@ def fib(n):
 def section(text):
     print("\n" + Fore.YELLOW + Style.BRIGHT + f"▶ {text}")
     print(Fore.YELLOW + "─" * 52)
-
 title("Fibonacci")
 
 input(
@@ -28,6 +27,7 @@ input(
 
 print(Fore.LIGHTGREEN_EX + f"\nThe fibonacci number of 5th position is {fib(5)}.")
 print(Fore.LIGHTGREEN_EX + f"The fibonacci number of 6th position is {fib(6)}.")
+
 
 n = int(input(Fore.LIGHTCYAN_EX + "\nEnter a number you want so it will be fibonacci : ")) 
 guess = input(Fore.LIGHTCYAN_EX + f"What do you think will be the fibonacci of {n} : ")
