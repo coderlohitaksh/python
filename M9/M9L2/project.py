@@ -87,5 +87,5 @@ input(
     Fore.LIGHTYELLOW_EX
     + "Press Enter to learn how Python uses Fibonacci to demonstrate tree recursion, where each function call creates two more recursive calls until the base cases are reached.....")
 
-print(Fore.LIGHTGREEN_EX + f"\nThe fibonacci number of 5th indexing is {fib(5)} , the sequence is 0, 1, 1, 2, 3, 5, 8.")
-print(Fore.LIGHTGREEN_EX + f"The fibonacci number of 6th indexing is {fib(6)} , the sequence is 0, 1, 1, 2, 3, 5, 8, 13.") 
+print(Fore.LIGHTGREEN_EX + f"\nThe fibonacci number of 5th indexing is {fib(5)} , the sequence is 0, 1, 1, 2, 3, 5.")
+print(Fore.LIGHTGREEN_EX + f"The fibonacci number of 6th indexing is {fib(6)} , the sequence is 0, 1, 1, 2, 3, 5, 8.") 
